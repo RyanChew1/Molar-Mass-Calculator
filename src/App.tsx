@@ -22,7 +22,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
 import Cookies from "js-cookie";
 import HistoryRow, { DataType } from "./components/HistoryRow";
 import { useToast } from "./components/ui/use-toast";
