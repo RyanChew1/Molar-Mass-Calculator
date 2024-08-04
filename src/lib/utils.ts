@@ -34,7 +34,7 @@ export const reloadCookies = () => {
   const cookies = saveValueCookies.map((saves, i) => ({
     saves,
     formula: saveFormulaCookies[i],
-    onRerender: () => void {}
+    onRerender: () => void {},
   }));
 
   return cookies;

@@ -11,6 +11,18 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import Cookies from "js-cookie";
 import HistoryRow, { DataType } from "./components/HistoryRow";
 import { useToast } from "./components/ui/use-toast";
@@ -97,8 +109,14 @@ const App = () => {
     setRerender(!rerender);
   };
 
+  const resetCookies = () => {
+    Cookies.set("formula", "");
+    Cookies.set("saves", "");
+    handleRerender();
+  };
+
   return (
-    <div className="bg-gray-800 w-screen h-screen flex flex-col justify-center align-top">
+    <div className="bg-gray-800 w-screen h-screen flex flex-col justify-evenly sm:justify-center align-top">
       <div className="flex w-full justify-center">
         <h1 className="font-extrabold text-3xl text-center fixed top-20 w-fit sm:text-5xl px-3 text-button">
           MOLAR MASS CALCULATOR
@@ -125,8 +143,30 @@ const App = () => {
 
         <SheetContent className="h-fit min-h-screen">
           <SheetHeader>
-            <SheetTitle className="font-bold text-2xl pb-5 w-full border-b-4 border-black">
+            <SheetTitle className="font-bold text-2xl pb-5 w-full border-b-4 border-black flex flex-col">
               <h1 className="ml-4">Calculation History</h1>
+              <AlertDialog>
+                <AlertDialogTrigger className="bg-red rounded-xl px-2 py-1 text-white mx-5 h-10 mt-5 w-[50%] self-center sm:self-start">
+                  Clear All
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle className="text-black font-semibold text-xl">
+                      Are you absolutely sure?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription className="text-black">
+                      This action cannot be undone. This will delete your entire
+                      calculation history?
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction className="bg-red" onClick={resetCookies}>
+                      Continue
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </SheetTitle>
           </SheetHeader>
           <ScrollArea className="no-scrollbar overflow-y-scroll h-screen mb-3 ">
