@@ -44,11 +44,11 @@ const Toast = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> &
     VariantProps<typeof toastVariants>
->(({ className, variant, ...props }, ref) => {
+>(({ className, variant, ...props}, ref) => {
   return (
     <ToastPrimitives.Root
       ref={ref}
-      className={cn(toastVariants({ variant }), className)}
+      className={cn(toastVariants({ variant }), className,`fixed bottom-0 left-0 sm:relative`)}
       {...props}
     />
   );

@@ -90,7 +90,7 @@ const App = () => {
   return (
     <div className="bg-gray-800 w-screen h-screen flex flex-col justify-center align-top">
       <div className="flex w-full justify-center">
-        <h1 className="font-extrabold text-5xl text-center fixed top-20 w-fit  text-button">
+        <h1 className="font-extrabold text-3xl text-center fixed top-20 w-fit sm:text-5xl text-button">
           MOLAR MASS CALCULATOR
         </h1>
       </div>
@@ -102,7 +102,7 @@ const App = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="#fff"
-            className="size-6"
+            className="size-6 sm:size-[3vh] min-size-6"
           >
             <path
               strokeLinecap="round"
@@ -142,10 +142,10 @@ const App = () => {
             type="text"
             onChange={handleChange}
           ></input>
-          <div className="flex flex-row self-center text-white mt-5 text-2xl">
+          <div className="flex flex-col text-center sm:flex-row self-center text-white mt-5 text-2xl sm:text-2xl">
             <h1>{`Molar Mass:  `}</h1>
             <h1 className="ml-2 font-extrabold">{output.toFixed(6)}</h1>
-            <h1 className="ml-1">grams per mole</h1>
+            <h1 className="ml-1 hidden sm:block">grams per mole</h1>
           </div>
           <button
             onClick={handleSave}
