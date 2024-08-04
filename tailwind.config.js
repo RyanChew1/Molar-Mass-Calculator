@@ -13,7 +13,7 @@ module.exports = {
       center: true,
       padding: "2rem",
       screens: {
-        'sm': {'max': '639px'}
+        sm: { max: "639px" },
       },
     },
     extend: {
@@ -26,6 +26,7 @@ module.exports = {
         button: "#c5b0dd",
         button_2: "#5f4082",
         green: "#60A561",
+        red: "#B9314F",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

@@ -2,6 +2,7 @@ import Markdown from "react-markdown";
 import supersub from "remark-supersub";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
+import { useToast } from "./ui/use-toast";
 
 export interface DataType {
   saves: string;
@@ -9,7 +10,11 @@ export interface DataType {
 }
 
 const HistoryRow = ({ saves, formula }: DataType) => {
+  const { toast } = useToast();
   const copyToClipboard = () => {
+    toast({
+      title: "Result Copied",
+    });
     navigator.clipboard.writeText(saves);
   };
 

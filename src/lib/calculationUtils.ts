@@ -12,6 +12,7 @@ export const extractNum = (str: string): [string | null, string] => {
 export const calculateMolarMass = (elements: string[]) => {
   let individualMasses: number[] = [];
   for (let i = 1; i < elements.length; i++) {
+    elements[i] = elements[i].replace("~1~", "");
     let [subScript, element]: [subScript: any, element: string] = extractNum(
       elements[i]
     ); // we will multiply element molar mass by subscript
