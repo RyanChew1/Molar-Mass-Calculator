@@ -118,7 +118,7 @@ const App = () => {
   return (
     <div className="bg-gray-800 w-screen h-screen flex flex-col justify-evenly sm:justify-center align-top">
       <div className="flex w-full justify-center">
-        <h1 className="font-extrabold text-3xl text-center fixed top-20 w-fit sm:text-5xl px-3 text-button">
+        <h1 className="font-extrabold text-5xl hidden text-center fixed top-20 w-fit sm:block px-3 text-button">
           MOLAR MASS CALCULATOR
         </h1>
       </div>
@@ -149,7 +149,7 @@ const App = () => {
                 <AlertDialogTrigger className="bg-red rounded-xl px-2 py-1 text-white mx-5 h-10 mt-5 w-[50%] self-center sm:self-start">
                   Clear All
                 </AlertDialogTrigger>
-                <AlertDialogContent>
+                <AlertDialogContent className="w-[90%] rounded-xl">
                   <AlertDialogHeader>
                     <AlertDialogTitle className="text-black font-semibold text-xl">
                       Are you absolutely sure?
@@ -161,7 +161,10 @@ const App = () => {
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction className="bg-red" onClick={resetCookies}>
+                    <AlertDialogAction
+                      className="bg-red"
+                      onClick={resetCookies}
+                    >
                       Continue
                     </AlertDialogAction>
                   </AlertDialogFooter>
