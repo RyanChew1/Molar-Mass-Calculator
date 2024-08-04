@@ -42,7 +42,7 @@ const HistoryRow = ({ saves, formula, onRerender }: DataType) => {
   };
 
   return (
-    <div className="flex flex-row border-black border-t-2 w-full justify-end">
+    <div className="flex flex-row border-slate-700 border-t-2 w-full justify-end">
       <div className="flex flex-col w-full pt-3">
         <Markdown
           remarkPlugins={[
@@ -50,11 +50,11 @@ const HistoryRow = ({ saves, formula, onRerender }: DataType) => {
             remarkMath,
             supersub,
           ]}
-          className="font-semibold text-2xl ml-4"
+          className="font-semibold text-2xl ml-4 text-black"
         >
           {formula}
         </Markdown>
-        <h1 className="font-normal text-2xl ml-4 pb-3">{saves}</h1>
+        <h1 className="font-normal text-2xl ml-4 pb-3 text-black">{saves}</h1>
       </div>
       <div className="flex flex-col sm:flex-row justify-evenly">
         <button
