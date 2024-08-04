@@ -18,19 +18,13 @@ import { Toaster } from "@/components/ui/toaster";
 import { calculateMolarMass } from "./lib/calculationUtils";
 import { removeParentheses, textToArray } from "./lib/stringUtils";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
-
-
+import { reloadCookies } from "./lib/utils";
 
 const App = () => {
-
   const { toast } = useToast();
-
 
   Cookies.set("saves", Cookies.get()["saves"]);
   Cookies.set("formula", Cookies.get()["formula"]);
-
-  console.log(Cookies.get())
 
   const [display, setDisplay] = useState("");
   const [output, setOutput] = useState(0);
@@ -66,9 +60,12 @@ const App = () => {
   };
 
   const handleSave = () => {
-    
-
-    if (output!=0 && output!=undefined && display!="" && display!=undefined){
+    if (
+      output != 0 &&
+      output != undefined &&
+      display != "" &&
+      display != undefined
+    ) {
       Cookies.set(
         "saves",
         Cookies.get()["saves"] + `,${output.toFixed(6).toString()}`
@@ -81,40 +78,24 @@ const App = () => {
     } else {
       toast({
         title: "Failed To Save",
-        variant: "destructive"
+        variant: "destructive",
       });
     }
-
-    
   };
 
-  let saveValueCookies = Array.from(
-    new Set(
-      Cookies.get()
-        ["saves"].split(",")
-        .filter((x) => x != "undefined" && x != "0.000000" && x!="")
-        .reverse()
-    )
-  );
-  let saveFormulaCookies = Array.from(
-    new Set(
-      Cookies.get()
-        ["formula"].split(",")
-        .filter((x) => x != "undefined" && x != "")
-        .reverse()
-    )
-  );
-
-  const cookies = saveValueCookies.map((saves, i) => ({
-    saves,
-    formula: saveFormulaCookies[i],
-  }));
-
   window.onkeydown = (ev: KeyboardEvent): any => {
-    if (ev.key === "Enter"){
-      handleSave()
+    // Enter to save value
+    if (ev.key === "Enter") {
+      handleSave();
     }
-  }
+  };
+
+  let cookies = reloadCookies();
+
+  const [rerender, setRerender] = useState(false);
+  const handleRerender = () => {
+    setRerender(!rerender);
+  };
 
   return (
     <div className="bg-gray-800 w-screen h-screen flex flex-col justify-center align-top">
@@ -123,47 +104,44 @@ const App = () => {
           MOLAR MASS CALCULATOR
         </h1>
       </div>
-      
-      <Sheet>
-      <SheetTrigger className="fixed left-10 top-10">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="#fff"
-          className="size-10 sm:size-[3vh] min-size-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-          />
-        </svg>
-      </SheetTrigger>
 
-      <SheetContent className="h-fit min-h-screen">
-        
+      <Sheet>
+        <SheetTrigger className="fixed left-10 top-10">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="#fff"
+            className="size-10 sm:size-[3vh] min-size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </SheetTrigger>
+
+        <SheetContent className="h-fit min-h-screen">
           <SheetHeader>
             <SheetTitle className="font-bold text-2xl pb-5 w-full border-b-4 border-black">
-              <h1 className="ml-4">
-
-              Calculation History
-              </h1>
+              <h1 className="ml-4">Calculation History</h1>
             </SheetTitle>
-            
           </SheetHeader>
           <ScrollArea className="no-scrollbar overflow-y-scroll h-screen mb-3 ">
-          <div className="grid grid-cols-1 gap-3 justify-center border-b-2 border-black w-full mb-20" >
+            <div className="grid grid-cols-1 gap-3 justify-center border-b-2 border-black w-full mb-20">
               {cookies?.map((save: DataType) => (
-                <HistoryRow saves={save.saves} formula={save.formula} />
+                <HistoryRow
+                  saves={save.saves}
+                  formula={save.formula}
+                  onRerender={handleRerender}
+                />
               ))}
             </div>
-            
-        </ScrollArea>
-      </SheetContent>
-    </Sheet>
-      
+          </ScrollArea>
+        </SheetContent>
+      </Sheet>
 
       <div className="flex justify-center">
         <div className="flex flex-col justify-center">
