@@ -4,7 +4,6 @@ import Markdown from "react-markdown";
 import supersub from "remark-supersub";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
-import elementMolarMasses from "./lib/molarMasses";
 import {
   Sheet,
   SheetContent,
